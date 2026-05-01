@@ -1,4 +1,4 @@
-from db.models import Movie, Genre, Actor
+from db.models import Movie
 from django.shortcuts import get_object_or_404
 
 
