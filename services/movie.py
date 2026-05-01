@@ -2,7 +2,7 @@ from db.models import Movie, Genre, Actor
 from django.shortcuts import get_object_or_404
 
 
-def get_movies(*, genres_ids: int = None, actors_ids: int = None) -> list:
+def get_movies(*, genres_ids: list[int] = None, actors_ids: list[int] = None) -> list:
 
     queryset = Movie.objects.all()
 
@@ -31,8 +31,8 @@ def get_movie_by_id(movie_id: int) -> Movie:
 
 
 def create_movie(movie_title: str, movie_description: str,
-                 genres_ids: int = None,
-                 actors_ids: int = None) -> Movie:
+                 genres_ids: list[int] = None,
+                 actors_ids: list[int] = None) -> Movie:
     movie = Movie.objects.create(
         title=movie_title,
         description=movie_description
@@ -40,10 +40,10 @@ def create_movie(movie_title: str, movie_description: str,
 
     if genres_ids:
         genres = Genre.objects.filter(id__in=genres_ids)
-        movie.genres.add(*genres)
+        movie.genres.set(genres_ids)
 
     if actors_ids:
         actors = Actor.objects.filter(id__in=actors_ids)
-        movie.actors.add(*actors)
+        movie.actors.set(actors_ids)
 
     return movie
