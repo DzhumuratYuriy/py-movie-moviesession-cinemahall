@@ -20,9 +20,7 @@ def get_movies_sessions(session_date: str = None) -> list:
     sessionset = MovieSession.objects.all()
 
     if session_date:
-        return sessionset.filter(
-            show_time__date=datetime.strptime(session_date, "%Y-%m-%d").date()
-        )
+        return sessionset.filter(show_time__date=session_date)
     return sessionset
 
 
