@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from db.models import MovieSession
 from django.shortcuts import get_object_or_404
 
